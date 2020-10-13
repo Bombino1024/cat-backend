@@ -35,18 +35,13 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path(r'^swagger(?P<format>\.json|\.yaml)$',
-         schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger',
                                          cache_timeout=0), name='schema-swagger-ui'),
-    path(r'^redoc/$', schema_view.with_ui('redoc',
-                                          cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('api-doc/', schema_view),
     path('cat-list/', api.catList, name="cat-list"),
     path('cat-detail/<str:pk>/', api.catDetail, name="cat-detail"),
-    path('cat-create/', api.catCreate, name="cat-create"),
-
-    path('cat-update/<str:pk>/', api.catUpdate, name="cat-update"),
-    path('cat-delete/<str:pk>/', api.catDelete, name="cat-delete")
+    path('cat-create', api.catCreate, name="cat-create"),
+    path('cat-update/<str:pk>', api.catUpdate, name="cat-update"),
+    path('cat-delete/<str:pk>', api.catDelete, name="cat-delete")
 ]
